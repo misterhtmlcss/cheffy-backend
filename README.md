@@ -11,6 +11,7 @@ https://github.com/srothenburger1/cheffy
 - Heroku Flask
 - Auth0
 - Cloudinary
+- Stripe
 
 ## Libraries
 - React
