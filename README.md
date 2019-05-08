@@ -4,14 +4,14 @@ Cheffy is a tool for Chef's to promote their skills, dishes and availability dir
 # Front-end:
 https://github.com/srothenburger1/cheffy
 
-# Technolog
+# Technology
 
 ## Platforms
-Heroku PostgreSQL
-Heroku Flask
-Auth0
-Cloudinary
+- Heroku PostgreSQL
+- Heroku Flask
+- Auth0
+- Cloudinary
 
 ## Libraries
-React
-Material-UI
+- React
+- Material-UI
