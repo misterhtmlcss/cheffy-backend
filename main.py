@@ -1,5 +1,23 @@
 from flask import Flask, request, jsonify, send_from_directory
 
+# PostgreSQL
+# import psycopg2
+# ---- http://initd.org/psycopg/docs/usage.html ----
+# ---- https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-python ----
+
+# Auth0
+# from jose import jwt
+# import json
+# from six.moves.urllib.request import urlopen
+# from functools import wraps
+# ---- https://auth0.com/docs/quickstart/backend/python ----
+# ---- https://devcenter.heroku.com/articles/auth0 ----
+
+# Cloudinary
+# Pass publicId to react and have react fetch and compile.
+# Store publicId in DB with chef/food type
+# https://cloudinary.com/documentation/react_integration
+
 # Serves react build
 app = Flask(__name__)
 
