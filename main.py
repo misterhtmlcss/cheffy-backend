@@ -21,6 +21,11 @@ def chef_type_list():
   # SELECT chef_name FROM Chefs WHERE specialty LIKE '%{type}%'
   return jsonify(['Chef Mike', 'Chef Luke', 'Chef Bob'])
 
+# Some sort of search bar API
+@app.route('/api/search/<search_term>')
+def search_field(search_term):
+  return 'search results'
+
 # Serves images
 # May not be needed??
 @app.route('/images/<path>')
