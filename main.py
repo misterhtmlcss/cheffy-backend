@@ -31,24 +31,18 @@ def chef_api(chef_name):
 # Serves the home page API
 @app.route('/api/homepage')
 def home_api():
-  return jsonify({'topScroller':[{'image':'images/sushi','text':'Got Sushi?','link':'sushi'}, {'image':'images/pasta','text':'Got pasta?','link':'pasta'}]})
+  return jsonify({'topScroller':[{'image':'sushi','text':'Got Sushi?','link':'sushi'}, {'image':'pasta','text':'Got pasta?','link':'pasta'}]})
 
 # Serves the chef list API, after a food type is selected
 @app.route('/api/<type>')
 def chef_type_list():
   # SELECT chef_name FROM Chefs WHERE specialty LIKE '%{type}%'
-  return jsonify(['Chef Mike', 'Chef Luke', 'Chef Bob'])
+  return jsonify([{'name':'Chef Mike','image':'mikepic'}, {'name':'Chef Luke','image':'lukepic'}, {'name':'Chef Bob','image':'bobpic'}])
 
 # Some sort of search bar API
 @app.route('/api/search/<search_term>')
 def search_field(search_term):
   return 'search results'
-
-# Serves images
-# May not be needed??
-@app.route('/images/<path>')
-def returnIcons(path):
-  return send_from_directory('images/',path)
 
 
 if __name__ == '__main__':
