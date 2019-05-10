@@ -55,10 +55,10 @@ def home_api():
 
     # Chefs
     chefs = []
-    cur.execute(f"SELECT * FROM chef")
-    chef_list = random.sample(cur.fetchall(),6)
+    cur.execute(f"SELECT name, picture FROM chef")
+    chef_list = random.sample(cur.fetchall(), 6)
     for result in chef_list:
-        chefs.append({'name': result[1], 'picture': result[2], 'specialties': [ft for ft in result[3].split(', ')], 'phone_num': result[4], 'description': result[5]})
+        chefs.append({'name': result[0], 'picture': result[1]})
 
     return jsonify({'topScroller': topScroller, 'foodTypes': food_types, 'chefs': chefs})
 
