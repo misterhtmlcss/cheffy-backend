@@ -30,8 +30,9 @@ app = Flask(__name__)
 # Serves the chef profile API
 @app.route('/api/chef/<chef_name>')
 def chef_api(chef_name):
-    # SELECT * FROM Chefs WHERE name = {chef_name}
-    return jsonify({'name': 'Chef Mike', 'phone': 4031234567, 'specialties': ['Japanese', 'Italian'], 'description': 'I\'m some dude who cooks stuff'})
+    cur.execute(f"SELECT * FROM Chef WHERE name = '{chef_name}'")
+    currChef = cur.fetchone()
+    return jsonify({'name': currChef[1], 'phone': currChef[4], 'specialties': [ft for ft in currChef[3].split(', ')], 'description': currChef[5]})
 
 
 # Serves the home page API
@@ -63,10 +64,14 @@ def home_api():
     return jsonify({'topScroller': topScroller, 'foodTypes': food_types, 'chefs': chefs})
 
 # Serves the chef list API, after a food type is selected
-@app.route('/api/<type>')
-def chef_type_list():
+@app.route('/api/<food_type>')
+def chef_type_list(food_type):
     # SELECT chef_name FROM Chefs WHERE specialty LIKE '%{type}%'
-    return jsonify([{'name': 'Chef Mike', 'image': 'mikepic'}, {'name': 'Chef Luke', 'image': 'lukepic'}, {'name': 'Chef Bob', 'image': 'bobpic'}])
+    chefs = []
+    cur.execute(f"SELECT name, picture FROM chef WHERE specialty LIKE '%{food_type.lower()}%'")
+    for chef in cur.fetchall():
+      chefs.append({'name':chef[0], 'picture':chef[1]})
+    return jsonify(chefs)
 
 # Some sort of search bar API
 @app.route('/api/search/<search_term>')
