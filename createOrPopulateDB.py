@@ -8,6 +8,8 @@ from faker import Faker
 import random
 fake = Faker()
 
+import re
+
 # Tasks to do:
 clear_tables = False
 create_databases = False
@@ -68,15 +70,15 @@ if populate_database:
 
 
   print("Populating Food_Type table...")
-  food_types = ["Algerian", "Argentinan", "Australian", "Brazilian", "Cameroonian", "Canadian", "Chilean", "Chinese", "Cuban", "Czechian", "Egyptian", "Ethiopian", "Franch", "German", "Ghanese", "Greek", "Guatemalan", "Haitian", "Hungarian", "Indian", "Indonesian", "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Jamaican", "Japanese", "Kazakhstani", "Kenyan", "Korean", "Lebanese", "Liberian", "Mexican", "Moroccan", "Mozambiquese", "Nigerian", "Pakistani", "Peruvian", "Philippino", "Polish", "Russian", "Saudi Arabian", "Slovenian", "South African", "Spanish", "Swedish", "Tanzanian", "Thai", "Turkish", "Ukrainian", "British", "American", "Vietnamese", "Zimbabwean"]
+  food_types = ["algerian", "argentinan", "australian", "brazilian", "cameroonian", "canadian", "chilean", "chinese", "cuban", "czechian", "egyptian", "ethiopian", "franch", "german", "ghanese", "greek", "guatemalan", "haitian", "hungarian", "indian", "indonesian", "iranian", "iraqi", "irish", "israeli", "italian", "jamaican", "japanese", "kazakhstani", "kenyan", "korean", "lebanese", "liberian", "mexican", "moroccan", "mozambiquese", "nigerian", "pakistani", "peruvian", "philippino", "polish", "russian", "saudi arabian", "slovenian", "south african", "spanish", "swedish", "tanzanian", "thai", "turkish", "ukrainian", "british", "american", "vietnamese", "zimbabwean"]
   for food in food_types:
-    cur.execute(f"INSERT INTO Food_Type(Food_Type, Picture) VALUES('{food}','{''.join(food.split())}');")
+    cur.execute(f"INSERT INTO Food_Type(Food_Type, Picture) VALUES('{food}','{re.sub('[^A-Za-z]','',food).lower()}');")
 
 
   print("Populating Chef table...")
   for num in range(random.randint(chef_num_range[0],chef_num_range[1])):
     name = fake.name()
-    cur.execute(f"INSERT INTO Chef(name, picture, specialty, phone_num) VALUES ('{name}', '{''.join(name.split())}','{', '.join(random.sample(food_types,random.randint(1,3)))}','{fake.phone_number()}')")
+    cur.execute(f"INSERT INTO Chef(name, picture, specialty, phone_num) VALUES ('{name}', '{re.sub('[^A-Za-z]','',name).lower()}','{', '.join(random.sample(food_types,random.randint(1,3)))}','{fake.phone_number()}')")
   
   
   print("Populating Customer table...")
