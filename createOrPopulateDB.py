@@ -70,7 +70,7 @@ if populate_database:
   print("Populating Food_Type table...")
   food_types = ["Algerian", "Argentinan", "Australian", "Brazilian", "Cameroonian", "Canadian", "Chilean", "Chinese", "Cuban", "Czechian", "Egyptian", "Ethiopian", "Franch", "German", "Ghanese", "Greek", "Guatemalan", "Haitian", "Hungarian", "Indian", "Indonesian", "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Jamaican", "Japanese", "Kazakhstani", "Kenyan", "Korean", "Lebanese", "Liberian", "Mexican", "Moroccan", "Mozambiquese", "Nigerian", "Pakistani", "Peruvian", "Philippino", "Polish", "Russian", "Saudi Arabian", "Slovenian", "South African", "Spanish", "Swedish", "Tanzanian", "Thai", "Turkish", "Ukrainian", "British", "American", "Vietnamese", "Zimbabwean"]
   for food in food_types:
-    cur.execute(f"INSERT INTO Food_Type(Food_Type, Picture) VALUES('{food}','{food}');")
+    cur.execute(f"INSERT INTO Food_Type(Food_Type, Picture) VALUES('{food}','{''.join(food.split())}');")
 
 
   print("Populating Chef table...")
