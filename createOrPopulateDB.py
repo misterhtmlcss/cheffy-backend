@@ -8,10 +8,12 @@ from faker import Faker
 import random
 fake = Faker()
 
-clear_tables = True
-create_databases = True
-populate_database = True
+# Tasks to do:
+clear_tables = False
+create_databases = False
+populate_database = False
 
+# How many of each:
 chef_num_range = [15,20]
 customer_num_range = [30,40]
 
@@ -63,17 +65,25 @@ if populate_database:
     for table in cur.fetchall():
       print(f"Clearing table: {table[0]}")
       cur.execute(f"TRUNCATE TABLE {table[0]};")
+
+
   print("Populating Food_Type table...")
   food_types = ["Algerian", "Argentinan", "Australian", "Brazilian", "Cameroonian", "Canadian", "Chilean", "Chinese", "Cuban", "Czechian", "Egyptian", "Ethiopian", "Franch", "German", "Ghanese", "Greek", "Guatemalan", "Haitian", "Hungarian", "Indian", "Indonesian", "Iranian", "Iraqi", "Irish", "Israeli", "Italian", "Jamaican", "Japanese", "Kazakhstani", "Kenyan", "Korean", "Lebanese", "Liberian", "Mexican", "Moroccan", "Mozambiquese", "Nigerian", "Pakistani", "Peruvian", "Philippino", "Polish", "Russian", "Saudi Arabian", "Slovenian", "South African", "Spanish", "Swedish", "Tanzanian", "Thai", "Turkish", "Ukrainian", "British", "American", "Vietnamese", "Zimbabwean"]
   for food in food_types:
     cur.execute(f"INSERT INTO Food_Type(Food_Type, Picture) VALUES('{food}','{food}');")
+
+
   print("Populating Chef table...")
   for num in range(random.randint(chef_num_range[0],chef_num_range[1])):
     name = fake.name()
     cur.execute(f"INSERT INTO Chef(name, picture, specialty, phone_num) VALUES ('{name}', '{''.join(name.split())}','{', '.join(random.sample(food_types,random.randint(1,3)))}','{fake.phone_number()}')")
+  
+  
   print("Populating Customer table...")
   for num in range(random.randint(customer_num_range[0],customer_num_range[1])):
     cur.execute(f"INSERT INTO Customer(username) VALUES ('{fake.user_name()}');")
+  
+  
   print("Populating Comment table...")
   cur.execute("SELECT COUNT(*) FROM customer")
   num_customers = cur.fetchone()
