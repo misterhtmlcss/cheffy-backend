@@ -11,9 +11,9 @@ fake = Faker()
 import re
 
 # Tasks to do:
-clear_tables = False
-create_databases = False
-populate_database = False
+clear_tables = True
+create_databases = True
+populate_database = True
 
 # How many of each:
 chef_num_range = [15,20]
@@ -54,7 +54,7 @@ if create_databases:
   print("Made Food_Type table")
 
   cur.execute("""CREATE TABLE Comment(
-    Chef_Id INT NOT NULL,
+    Chef_Id INT NOT NULL REFERENCES chef,
     Username TEXT NOT NULL,
     Comment TEXT NOT NULL
   );""")
@@ -66,7 +66,7 @@ if populate_database:
     cur.execute(f"SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';")
     for table in cur.fetchall():
       print(f"Clearing table: {table[0]}")
-      cur.execute(f"TRUNCATE TABLE {table[0]};")
+      cur.execute(f"TRUNCATE TABLE {table[0]} CASCADE;")
 
 
   print("Populating Food_Type table...")
